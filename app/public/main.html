@@ -1,0 +1,89 @@
+<div layout="row" layout-align="space-around center">
+
+		<div >
+                <img ng-src="images/logo.jpeg" class="md-card-image">
+                    <p style="font-style: italic" align="center">
+						Connect with the world of sensors.<br><br>
+						Have a sensor to share with the world? <br><br>
+						Want to use a sensor?
+
+                    </p>
+
+		</div>
+
+		<div layout-padding layout-wrap>
+
+				<form name="userForm">
+
+					<div layout layout-sm="row">
+						<md-input-container flex>
+							<label>First name</label>
+							<input ng-model="user.firstName">
+						</md-input-container>
+						<md-input-container flex>
+							<label>Last Name</label>
+							<input ng-model="user.lastName">
+						</md-input-container>
+					</div>
+
+					<div layout="column" >
+
+						<md-input-container flex>
+							<label>Email</label>
+							<input ng-model="user.email" type="email" required>
+						</md-input-container>
+
+						<md-input-container flex>
+							<label>Password</label>
+							<input ng-model="user.password" type="password" required>
+						</md-input-container>
+
+						<md-input-container flex>
+							<label>Retype Password</label>
+							<input ng-model="rePassword" type="password" required>
+						</md-input-container>
+
+					</div>
+
+
+
+					<md-input-container class="md-block">
+						<label>Address</label>
+						<input ng-model="user.address">
+					</md-input-container>
+					<md-input-container md-no-float class="md-block">
+						<input ng-model="user.address2" placeholder="Address 2">
+					</md-input-container>
+					<div layout layout-sm="column">
+						<md-input-container flex>
+							<label>City</label>
+							<input ng-model="user.city">
+						</md-input-container>
+						<md-input-container flex>
+							<label>State</label>
+							<md-select ng-model="user.state">
+								<md-option ng-repeat="state in states" value="{{state.abbrev}}">
+									{{state.abbrev}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+
+					</div>
+
+
+					<md-radio-group ng-model="user.userType" layout="row"  >
+						<md-radio-button value="SensorUser" class="md-primary">Sensor User</md-radio-button>
+						<md-radio-button value="SensorOwner"> Sensor Owner </md-radio-button>
+					</md-radio-group>
+
+					<md-button class="md-raised md-primary" layout-sm="row" layout-align="center center">
+						Register
+					</md-button>
+				</form>
+
+
+
+		</div>
+</div>
+
+    	
