@@ -13,7 +13,7 @@
 
 		<div layout-padding layout-wrap>
 
-				<form name="userForm">
+				<form name="userForm" ng-submit="register()">
 
 					<div layout layout-sm="row">
 						<md-input-container flex>
@@ -61,19 +61,15 @@
 						</md-input-container>
 						<md-input-container flex>
 							<label>State</label>
-							<md-select ng-model="user.state">
-								<md-option ng-repeat="state in states" value="{{state.abbrev}}">
-									{{state.abbrev}}
-								</md-option>
-							</md-select>
+							<input ng-model="user.state">
 						</md-input-container>
 
 					</div>
 
 
 					<md-radio-group ng-model="user.userType" layout="row"  >
-						<md-radio-button value="SensorUser" class="md-primary">Sensor User</md-radio-button>
-						<md-radio-button value="SensorOwner"> Sensor Owner </md-radio-button>
+						<md-radio-button value="sensor_user" class="md-primary">Sensor User</md-radio-button>
+						<md-radio-button value="sensor_owner"> Sensor Owner </md-radio-button>
 					</md-radio-group>
 
 					<md-button class="md-raised md-primary" layout-sm="row" layout-align="center center">

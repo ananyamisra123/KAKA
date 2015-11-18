@@ -53,23 +53,22 @@ app.controller('authController', function($scope, $http, $rootScope, $location){
 	$scope.rePassword = '';
 	$scope.login = function(){
 
-		if($scope.user.password == $scope.rePassword)
-		{
 			$http.post('/auth/login', $scope.user).success(function(data){
 
 				if(data.state == 'success'){
 
 					$rootScope.authenticated = true;
-					$rootScope.current_user = data.user.username;
-					$location.path('/');
+					$rootScope.current_user = data.user.firstName;
+					$location.path('/sensor-user');
+
+
+
 				}
 				else{
 					$scope.error_message = data.message;
 				}
 			});
-		}else{
-			$scope.error_message = "Passwords don't match";
-		}
+
 
 	};
 
@@ -77,8 +76,10 @@ app.controller('authController', function($scope, $http, $rootScope, $location){
 		$http.post('/auth/signup', $scope.user).success(function(data){
 			if(data.state == 'success'){
 				$rootScope.authenticated = true;
-				$rootScope.current_user = data.user.username;
-				$location.path('/');
+				$rootScope.current_user = data.user.firstName;
+
+				$location.path('/sensor-user');
+
 			}
 			else{
 				$scope.error_message = data.message;

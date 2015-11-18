@@ -3,35 +3,52 @@
     <title>Sensor Book</title>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
 </head>
 <body ng-app="sensorCloudApp">
-
 <md-toolbar>
     <div class="md-medium-tall">
 
-        <div layout="row" layout-align="center center">
+        <section layout="row"  layout-align="center center" layout-wrap ng-controller="authController">
 
-            <h2>
-                <span href="#">Sensor Book</span>
-            </h2>
-
+            <span href="#">Sensor Book</span>
             <span flex></span>
 
-            <md-input-container>
-                <label><font color="white">Email</font></label>
-                <input ng-model="user.email" type="email" required>
-            </md-input-container>
-            <md-input-container>
-                <label><font color="white">Password</font></label>
-                <input ng-model="user.password" type="password">
-            </md-input-container>
+            <form layout layout-align="center center" layout-wrap name="loginForm" ng-submit="login()" ng-hide="authenticated">
+                <md-input-container flex style="max-width:200px;">
+                    <label>Email</label>
+                    <input ng-model="user.email" type="email" required>
+                </md-input-container>
+                <md-input-container flex style="max-width:200px;">
+                    <label>Password</label>
+                    <input ng-model="user.password" type="password" required>
 
-            <md-button class="md-primary">Login</md-button>
+                </md-input-container>
 
-        </div>
+                <md-button class="md-raised md-primary md-hue-2">Login
+                </md-button>
+            </form>
+
+            <section ng-show="authenticated">
+
+                <label>Signed in as {{current_user}}</label>
+
+                <md-button class="md-button" ng-click="signout()">
+                    Signout</md-button>
+
+
+            </section>
+        </section>
+
     </div>
 </md-toolbar>
-
 
 <div ng-view></div>
 

@@ -1,9 +1,10 @@
+
 <div layout="column" layout-fill   ng-cloak>
     <section layout="row" flex>
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
             <md-button ng-click="close()" class="md-primary">
                 MANAGE SENSOR
-                </md-button>
+            </md-button>
             <md-button ng-click="close()" class="md-primary">
                 PROFILE
             </md-button>
@@ -11,7 +12,34 @@
                 Request Data
             </md-button>
         </md-sidenav>
+        <md-content flex layout-padding>
+            <div layout="column" layout-fill layout-align="top center">
+                <table class="table table-hover" style= "border: 1px solid black;">
+                    <tr class="info">
+                        <th>Sensor Type</th>
+                        <th>Model Number</th>
+                        <th>Description</th>
+                        <th>State</th>
+                    </tr>
+                    <tr class="success tdstyle">
+                        <td>GPS</td>
+                        <td>DF23454</td>
+                        <td>Latitude and Longitude</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr class="success tdstyle">
+                        <td>Temperature</td>
+                        <td>TT235454</td>
+                        <td>Farhenheit</td>
+                        <td>Active</td>
+                    </tr>
+                </table>
+            </div>
+        </md-content>
     </section>
 </div>
+
+
+
 
 
