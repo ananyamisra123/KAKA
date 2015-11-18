@@ -13,14 +13,23 @@ app.config(function($routeProvider){
 
 	$routeProvider
 
+			.when('/sensor-user',{
 
-		.when('/', {
+				templateUrl:'sensor_user_db.html',
+				controller: 'sensorUserController'
+			})
+
+			.when('/', {
 
 			templateUrl: 'main.html',
 			controller: 'authController'
 
-		})
+			})
 
+			.when('/sensor-owner',{
+				templateUrl:'sensor_owner_db.html',
+				controller: 'sensorOwnerController'
+			})
 });
 
 
@@ -29,11 +38,10 @@ app.factory('postService', function($resource){
 });
 
 app.controller('authController', function($scope, $http, $rootScope, $location){
-	$scope.user = { username: '',
+	$scope.user = { email: '',
 		            password: '',
 		            firstName: '',
 		            lastName: '',
-					email: '',
 					address: '',
 					address2: '',
 					city: '',
@@ -77,4 +85,12 @@ app.controller('authController', function($scope, $http, $rootScope, $location){
 			}
 		});
 	};
+});
+
+app.controller('sensorOwnerController', function($scope, $http, $rootScope, $location){
+
+});
+
+app.controller('sensorUserController', function($scope, $http, $rootScope, $location){
+
 });
