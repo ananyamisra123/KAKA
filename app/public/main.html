@@ -1,84 +1,101 @@
-<div layout="row" layout-align="space-around center">
+<div layout="row" layout-align="space-around center" md-theme="custom" layout-padding>
 
-		<div >
+		<div flex layout="column" layout-align="center center">
                 <img ng-src="images/logo.jpeg" class="md-card-image">
                     <p style="font-style: italic" align="center">
 						Connect with the world of sensors.<br><br>
 						Have a sensor to share with the world? <br><br>
 						Want to use a sensor?
-
-                    </p>
+					</p>
 
 		</div>
 
-		<div layout-padding layout-wrap>
+		<div layout="column" class="md-whiteframe-2dp" layout-padding flex ng-cloak layout-wrap>
+			<h2>Register</h2>
+			<p>Don't have an account</p>
+			<form name="registerForm" ng-submit="register()">
 
-				<form name="userForm" ng-submit="register()">
-
-					<div layout layout-sm="row">
-						<md-input-container flex>
-							<label>First name</label>
-							<input ng-model="user.firstName">
-						</md-input-container>
-						<md-input-container flex>
-							<label>Last Name</label>
-							<input ng-model="user.lastName">
-						</md-input-container>
-					</div>
-
-					<div layout="column" >
-
-						<md-input-container flex>
-							<label>Email</label>
-							<input ng-model="user.email" type="email" required>
-						</md-input-container>
-
-						<md-input-container flex>
-							<label>Password</label>
-							<input ng-model="user.password" type="password" required>
-						</md-input-container>
-
-						<md-input-container flex>
-							<label>Retype Password</label>
-							<input ng-model="rePassword" type="password" required>
-						</md-input-container>
-
-					</div>
-
-
-
-					<md-input-container class="md-block">
-						<label>Address</label>
-						<input ng-model="user.address">
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label>First name</label>
+						<input name="firstName" ng-model="user.firstName" required >
+						<div ng-messages="registerForm.firstName.$error" ng-if='registerForm.firstName.$touched'>
+							<div ng-message="required">First Name is required.</div>
+						</div>
 					</md-input-container>
-					<md-input-container md-no-float class="md-block">
-						<input ng-model="user.address2" placeholder="Address 2">
+					<md-input-container  flex>
+						<label>Last Name</label>
+						<input name="lastName" ng-model="user.lastName" required>
+						<div ng-messages="registerForm.lastName.$error" ng-if='registerForm.lastName.$touched'>
+							<div ng-message="required">Last Name is required.</div>
+						</div>
 					</md-input-container>
-					<div layout layout-sm="column">
-						<md-input-container flex>
-							<label>City</label>
-							<input ng-model="user.city">
-						</md-input-container>
-						<md-input-container flex>
-							<label>State</label>
-							<input ng-model="user.state">
-						</md-input-container>
+				</div>
 
+				<md-input-container>
+					<label>Email</label>
+					<input name="email" ng-model="user.email" type="email" required>
+					<div ng-messages="registerForm.email.$error" ng-if='registerForm.email.$touched'>
+						<div ng-message="required">Email is required.</div>
+						<div ng-message="email">Your email address is invalid</div>
 					</div>
+				</md-input-container>
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label>Password</label>
+						<input name="password" ng-model="user.password"  type="password" required>
+						<div ng-messages="registerForm.password.$error" ng-if='registerForm.password.$touched'>
+							<div ng-message="required">Password is required.</div>
+						</div>
+					</md-input-container>
+					<md-input-container flex>
+						<label>Confirm Password</label>
+						<input name="confirmPassword" ng-model="user.rePassword" type="password" required>
+						<div ng-messages="registerForm.confirmPassword.$error" ng-if='registerForm.confirmPassword.$touched'>
+							<div ng-message="required">Confirm Password is required.</div>
+							<div ng-message="password">Password's Does not Match</div>
+						</div>
+					</md-input-container>
+				</div>
 
+				<md-input-container>
+					<label>Phone Number</label>
+					<input name="phoneNumber" ng-model="user.phoneNumber" type="tel" required>
+					<div ng-messages="registerForm.phoneNumber.$error" ng-if='registerForm.phoneNumber.$touched'>
+						<div ng-message="required">Phone Number is required.</div>
+						<div ng-message="tel">Phone Number is invalid</div>
+					</div>
+				</md-input-container>
 
+				<md-input-container class="md-block">
+					<label>Address</label>
+					<input ng-model="user.address">
+				</md-input-container>
+
+				<md-input-container md-no-float class="md-block">
+					<input ng-model="user.address2" placeholder="Address 2">
+				</md-input-container>
+
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label>City</label>
+						<input ng-model="user.city">
+					</md-input-container>
+					<md-input-container flex>
+						<label>State</label>
+						<input ng-model="user.state">
+					</md-input-container>
+				</div>
+
+				<div layout="column" layout-align="center center">
 					<md-radio-group ng-model="user.userType" layout="row"  >
 						<md-radio-button value="sensor_user" class="md-primary">Sensor User</md-radio-button>
 						<md-radio-button value="sensor_owner"> Sensor Owner </md-radio-button>
 					</md-radio-group>
 
-					<md-button class="md-raised md-primary" layout-sm="row" layout-align="center center">
-						Register
-					</md-button>
-				</form>
-
-
-
+					<md-button class="md-primary md-raised" ng-disabled="registerForm.$invalid">Register</md-button>
+				</div>
+			</form>
 		</div>
 </div>
 

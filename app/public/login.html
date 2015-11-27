@@ -3,12 +3,12 @@
   	 	<form name="login-form" ng-submit="login()">
   	 		<md-input-container>
 				<label>Username</label>
-				<input type="text" ng-model="user.username">
+				<input type="text" ng-bind="user.email">
 			</md-input-container>
 					
 			<md-input-container>
 				<label>Password</label>
-				<input type="password" ng-model="user.password">
+				<input type="password" ng-bind="user.password">
 			</md-input-container>
 		</form>
     </md-card-content>

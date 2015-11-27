@@ -15,6 +15,6 @@ var userSchema = new mongoose.Schema({
     state: String,
     user_type:String,
     created_at: {type: Date, default: Date.now}
-})
+});
 
 mongoose.model('User', userSchema);

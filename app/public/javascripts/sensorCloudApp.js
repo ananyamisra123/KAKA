@@ -1,4 +1,4 @@
-var app = angular.module('sensorCloudApp', ['ngRoute', 'ngResource', 'ngMaterial']).run(function($http, $rootScope) {
+var app = angular.module('sensorCloudApp', ['userModule','ui.router', 'ngResource', 'ngMaterial', 'ngMessages']).run(function($http, $rootScope) {
 	$rootScope.authenticated = false;
 	$rootScope.current_user = 'Guest';
 
@@ -9,83 +9,74 @@ var app = angular.module('sensorCloudApp', ['ngRoute', 'ngResource', 'ngMaterial
 	};
 });
 
-app.config(function($routeProvider){
+app.config(function ($stateProvider, $urlRouterProvider){
+	$stateProvider
 
-	$routeProvider
+		.state('index',{
+			url:'/index',
+			views: {
+				'' : { templateUrl: 'main.html',
+					   controller: 'UserCtrl'},
+				'toolbar': {
+					templateUrl : '/partials/toolbar.html',
+					controller: 'ToolbarCtrl as toolbar'
+				}
+			}
+		})
+		.state('sensor-owner',{
+			url:'/sensor-owner',
+			views: {
+					'': {
+						templateUrl: 'sensor_owner_db.html'
+						},
+					'toolbar': {
+						templateUrl : '/partials/toolbar.html',
+						controller: 'ToolbarCtrl as toolbar'
+						}
+			}
+		})
+		.state('sensor-owner.profile',{
+			url:'/profile',
+			templateUrl: '/partials/profile.html',
+			controller: 'ProfileCtrl',
+			controllerAs: 'profile'
+		})
+		.state('sensor-owner.manage-sensor',{
+			url:'/manage-sensors',
+			templateUrl: '/partials/onwer-manage-sensor.html'
+		});
 
-			.when('/sensor-user',{
-
-				templateUrl:'sensor_user_db.html',
-				controller: 'sensorUserController'
-			})
-
-			.when('/', {
-
-			templateUrl: 'main.html',
-			controller: 'authController'
-
-			})
-
-			.when('/sensor-owner',{
-				templateUrl:'sensor_owner_db.html',
-				controller: 'sensorOwnerController'
-			})
+	$urlRouterProvider.when('', '/index');
 });
 
+app.config(function($mdThemingProvider){
+
+	$mdThemingProvider.theme('default')
+		.primaryPalette('indigo', {
+			'default': '500',
+			'hue-1': '50',
+			'hue-2': '700',
+			'hue-3' : '300'
+		})
+		.accentPalette('blue', {
+			'default': 'A700' // use shade 200 for default, and keep all other shades the same
+		})
+		.backgroundPalette('grey');
+
+	$mdThemingProvider.theme('custom')
+		.primaryPalette('blue')
+		.accentPalette('orange')
+		.warnPalette('red');
+
+});
+app.config(['$mdIconProvider', function($mdIconProvider) {
+	$mdIconProvider
+		.iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+		.defaultIconSet('img/icons/sets/core-icons.svg', 24);
+}]);
 
 app.factory('postService', function($resource){
 	return $resource('/api/posts/:id');
-});
-
-app.controller('authController', function($scope, $http, $rootScope, $location){
-	$scope.user = { email: '',
-		            password: '',
-		            firstName: '',
-		            lastName: '',
-					address: '',
-					address2: '',
-					city: '',
-					state: '',
-					userType: ''
-	};
-
-	$scope.error_message = '';
-	$scope.rePassword = '';
-	$scope.login = function(){
-
-			$http.post('/auth/login', $scope.user).success(function(data){
-
-				if(data.state == 'success'){
-
-					$rootScope.authenticated = true;
-					$rootScope.current_user = data.user.firstName;
-					$location.path('/sensor-user');
-
-
-
-				}
-				else{
-					$scope.error_message = data.message;
-				}
-			});
-
-
-	};
-
-	$scope.register = function(){
-		$http.post('/auth/signup', $scope.user).success(function(data){
-			if(data.state == 'success'){
-				$rootScope.authenticated = true;
-				$rootScope.current_user = data.user.firstName;
-
-				$location.path('/sensor-user');
-
-			}
-			else{
-				$scope.error_message = data.message;
-			}
-		});
-	};
 });
 
 app.controller('sensorOwnerController', function($scope, $http, $rootScope, $location){
