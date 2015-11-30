@@ -1,4 +1,4 @@
-var app = angular.module('sensorCloudApp', ['userModule','ui.router', 'ngResource', 'ngMaterial', 'ngMessages']).run(function($http, $rootScope) {
+var app = angular.module('sensorCloudApp', ['userModule','ui.router', 'ngResource', 'ngMaterial', 'ngMessages','md.data.table']).run(function($http, $rootScope) {
 	$rootScope.authenticated = false;
 	$rootScope.current_user = 'Guest';
 
@@ -35,6 +35,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
 						}
 			}
 		})
+
 		.state('sensor-owner.profile',{
 			url:'/profile',
 			templateUrl: '/partials/profile.html',
@@ -43,7 +44,36 @@ app.config(function ($stateProvider, $urlRouterProvider){
 		})
 		.state('sensor-owner.manage-sensor',{
 			url:'/manage-sensors',
-			templateUrl: '/partials/onwer-manage-sensor.html'
+			templateUrl: '/partials/onwer-manage-sensor.html',
+			controller: 'ManageSensorCtrl'
+		})
+		.state('sensor-user',{
+			url:'/sensor-user',
+			views: {
+				'': {
+					templateUrl: 'sensor_user_db.html'
+				},
+				'toolbar': {
+					templateUrl : '/partials/toolbar.html',
+					controller: 'ToolbarCtrl as toolbar'
+				}
+			}
+		})
+		.state('sensor-user.profile',{
+			url:'/profile',
+			templateUrl: '/partials/profile.html',
+			controller: 'ProfileCtrl',
+			controllerAs: 'profile'
+		})
+		.state('sensor-user.availableSensor',{
+				url:'/availableSensor',
+				templateUrl: '/partials/AvailableSensor.html',
+				controller : 'AvailableSensorCtrl'
+		})
+		.state('sensor-user.mySensor',{
+			url:'/mySensor',
+			templateUrl: '/partials/MySensor.html',
+			controller : 'MySensorCtrl'
 		});
 
 	$urlRouterProvider.when('', '/index');

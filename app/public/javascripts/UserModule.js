@@ -74,7 +74,7 @@ angular.module('userModule',[])
                 if(data.state == 'success') {
                     User.setUser(data.user);
                    console.log(data.user);
-                    $state.go('sensor-owner');
+                    $state.go('sensor-user');
                     User.setAuthenticated(true);
                     console.log(User.isAuthenticated());
                 }

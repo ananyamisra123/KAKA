@@ -1,16 +1,16 @@
-<form name="registerForm" ng-submit="register()" md-theme="custom" layout-padding>
+<form name="registerForm" md-theme="custom" layout-padding>
 
     <div layout layout-sm="column">
         <md-input-container flex>
             <label>First name</label>
-            <input name="firstName" ng-model="user.firstName" required ng-disabled="!profile.viewMode">
+            <input name="firstName" ng-model="profile.user.firstName" required ng-disabled="!viewMode">
             <div ng-messages="registerForm.firstName.$error" ng-if='registerForm.firstName.$touched'>
                 <div ng-message="required">First Name is required.</div>
             </div>
         </md-input-container>
         <md-input-container  flex>
             <label>Last Name</label>
-            <input name="lastName" ng-model="user.lastName" required ng-disabled="!profile.viewMode">
+            <input name="lastName" ng-model="profile.user.lastName" required ng-disabled="!viewMode">
             <div ng-messages="registerForm.lastName.$error" ng-if='registerForm.lastName.$touched'>
                 <div ng-message="required">Last Name is required.</div>
             </div>
@@ -19,7 +19,7 @@
 
     <md-input-container>
         <label>Email</label>
-        <input name="email" ng-model="user.email" type="email" required ng-disabled="true">
+        <input name="email" ng-model="profile.user.email" type="email" required ng-disabled="true">
         <div ng-messages="registerForm.email.$error" ng-if='registerForm.email.$touched'>
             <div ng-message="required">Email is required.</div>
             <div ng-message="email">Your email address is invalid</div>
@@ -28,7 +28,7 @@
 
     <md-input-container>
         <label>Phone Number</label>
-        <input name="phoneNumber" ng-model="user.phoneNumber" type="tel" required ng-disabled="!profile.viewMode">
+        <input name="phoneNumber" ng-model="profile.user.phoneNumber" type="tel" required ng-disabled="!viewMode">
         <div ng-messages="registerForm.phoneNumber.$error" ng-if='registerForm.phoneNumber.$touched'>
             <div ng-message="required">Phone Number is required.</div>
             <div ng-message="tel">Phone Number is invalid</div>
@@ -37,25 +37,27 @@
 
     <md-input-container class="md-block">
         <label>Address</label>
-        <input ng-model="user.address" ng-disabled="!profile.viewMode">
+        <input ng-model="user.address" ng-disabled="!viewMode">
     </md-input-container>
 
     <md-input-container md-no-float class="md-block">
-        <input ng-model="user.address2" placeholder="Address 2" ng-disabled="!profile.viewMode">
+        <input ng-model="user.address2" placeholder="Address 2" ng-disabled="!viewMode">
     </md-input-container>
 
     <div layout layout-sm="column">
         <md-input-container flex>
             <label>City</label>
-            <input ng-model="user.city" ng-disabled="!profile.viewMode">
+            <input ng-model="user.city" ng-disabled="!viewMode">
         </md-input-container>
         <md-input-container flex>
             <label>State</label>
-            <input ng-model="user.state" ng-disabled="!profile.viewMode">
+            <input ng-model="user.state" ng-disabled="!viewMode">
         </md-input-container>
     </div>
 
-    <div layout="column" layout-align="center center">
-        <md-button class="md-primary md-raised" ng-click="edit()" ng-hide="profile.viewMode">Edit</md-button>
+    <div layout="row" layout-align="center center" >
+        <md-button class="md-primary md-raised" ng-click="edit()" ng-hide="viewMode">Edit</md-button>
+        <md-button class="md-primary md-raised" ng-click="save()" ng-show="viewMode">Save</md-button>
+        <md-button class="md-primary md-raised" ng-click="cancel()" ng-show="viewMode">Cancel</md-button>
     </div>
 </form>

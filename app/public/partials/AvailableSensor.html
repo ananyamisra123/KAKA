@@ -1,0 +1,58 @@
+<div id="demo">
+
+
+    <md-data-table-toolbar>
+        <h2 class="md-title">Virtual Sensors</h2>
+    </md-data-table-toolbar>
+
+    <md-data-table-container>
+        <table md-data-table md-row-select="selected" md-progress="deferred">
+            <thead md-order="query.order" md-trigger="onOrderChange">
+            <tr>
+                <th>Sensor Name</th>
+                <th>Sensor Type</th>
+                <th>Serial Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr md-auto-select ng-repeat="sensor in sensors">
+                <td>{{ sensor.sensorName }}</td>
+                <td>{{ sensor.sensorType }}</td>
+                <td>{{ sensor.sensorSerialNo }}</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </md-data-table-container>
+
+</div>
+
+<div>
+    <md-data-table-toolbar>
+        <h2 class="md-title">Available Sensors</h2>
+    </md-data-table-toolbar>
+
+    <md-data-table-container>
+        <table md-data-table md-row-select="selected" md-progress="deferred">
+            <thead md-order="query.order" md-trigger="onOrderChange">
+            <tr>
+                <th>Sensor Name</th>
+                <th>Sensor Type</th>
+                <th>Serial Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr md-auto-select ng-repeat="sensor in sensors">
+                <td>{{ sensor.sensorName }}</td>
+                <td>{{ sensor.sensorType }}</td>
+                <td>{{ sensor.sensorSerialNo }}</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </md-data-table-container>
+
+    <div layout="row" layout-align="center center" >
+        <md-button class="md-primary md-raised" ng-click="requestSensor()" ng-hide="viewMode">Request Sensors</md-button>
+    </div>
+</div>
