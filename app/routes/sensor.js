@@ -70,6 +70,21 @@ router.route('/getSensors')
 
         });
     });
+
+router.routes('/availableSensors')
+
+    .get(function(req,res){
+        Sensor.find({'activated': true}, function(err, sensors){
+           if(err)console.log(err);
+
+            if(!sensors){
+                return res.send({'status': failure, message: 'No Available Sensors' });
+            }
+            res.json(sensors);
+        });
+
+    });
+
 router.route('/data')
 
     .post(function(req,res){
