@@ -9,7 +9,6 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var models = require('./models/models.js');
 var conn_str = 'mongodb://localhost:27017/sensorbook';
-//var conn_str = 'mongodb://52.25.180.229:27017/sensorbook';
 console.log('Mongo URL: ' + conn_str);
 mongoose.connect(conn_str);
 

@@ -70,10 +70,10 @@ module.exports = function(passport){
                     },
                     function (token, newUser, done) {
                         var smtpTransport = nodemailer.createTransport('SMTP', {
-                            service: 'Gmail',
+                            service: 'hotmail',
                             auth: {
-                                user: 'feedback.onedeveloper@gmail.com',
-                                pass: 'karan1993'
+                                user: 'er.karanbirsingh@outlook.com',
+                                pass: 'kbs009199359'
                             }
                         });
                         var mailOptions = {
