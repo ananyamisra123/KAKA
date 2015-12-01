@@ -1,0 +1,29 @@
+<md-toolbar layout="row" layout-align="space-around center" layout-padding class="md-medium-tall md-whiteframe-4dp md-hue-2" ng-controller="UserCtrl">
+    <p id="title" ng-hide="toolbar.isLoginOrForgot">SensorBook</p>
+    <span flex ng-if="!(toolbar.isLoginOrForgot)"></span>
+    <div layout row layout-align="center center" ng-show="toolbar.isLoginOrForgot">
+        <p>Sensor Book</p>
+    </div>
+    <form id="loginForm" layout="row" layout-align="space-around center" layout-wrap ng-submit="login()" ng-hide="toolbar.isAuthenticated || toolbar.isLoginOrForgot" >
+        <md-input-container>
+            <label>Email</label>
+            <input ng-model="user.email" type="email" required>
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input ng-model="user.password" type="password" required>
+        </md-input-container>
+        <md-button class="md-primary md-raised md-hue-4">
+            Login
+        </md-button>
+    </form>
+    <md-button class="md-button" ng-click="forgot()" ng-hide="toolbar.isAuthenticated || toolbar.isLoginOrForgot">
+        Forgot Password?
+    </md-button>
+
+    <div layout="row" layout-align="space-around center" ng-show="toolbar.isAuthenticated">
+        <p>Welcome <span ng-bind="toolbar.user.firstName"></span> </p>
+        <md-button class="md-primary md-raised md-hue-4" ng-click="logout()">Logout</md-button>
+    </div>
+
+</md-toolbar>

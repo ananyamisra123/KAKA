@@ -8,32 +8,16 @@ var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var models = require('./models/models.js');
-var mongo = process.env.VCAP_SERVICES;
-var conn_str = "";
-if (mongo) {
-  var env = JSON.parse(mongo);
-  if (env['mongodb-2.4']) {
-    mongo = env['mongodb-2.4'][0]['credentials'];
-    if (mongo.url) {
-      conn_str = mongo.url;
-    } else {
-      console.log("No mongo found");
-    }
-  } else {
-    conn_str = 'mongodb://localhost:27017/sensorbook';
-  }
-} else {
-  conn_str = 'mongodb://localhost:27017/sensorbook';
-}
-
+var conn_str = 'mongodb://localhost:27017/sensorbook';
+//var conn_str = 'mongodb://52.25.180.229:27017/sensorbook';
 console.log('Mongo URL: ' + conn_str);
 mongoose.connect(conn_str);
 
 
 //import the routers
-var index = require('./routes/index');
+var sensor = require('./routes/sensor');
 var authenticate = require('./routes/auth')(passport);
-
+var api = require('./routes/api');
 var app = express();
 
 // view engine setup
@@ -54,9 +38,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //register routers to root paths
-app.use('/', index);
+app.use('/sensor',sensor);
 app.use('/auth', authenticate);
-
+app.use('/api', api);
 //// Initialize Passport
 var initPassport = require('./passport-init');
 initPassport(passport);

@@ -1,0 +1,19 @@
+<div layout-margin layout layout-align="center center" layout-fill md-theme="custom" flex>
+
+    <form name="forgotForm" class="md-whiteframe-2dp" style="min-width:60%; min-height: 60%" layout="column" ng-submit="forgotPassword()">
+        <md-toolbar class="md-toolbar-tools" layout="row" layout-align="center center" flex>
+            <h2>Forgot Password</h2>
+        </md-toolbar>
+        <md-input-container layout-margin="5dp">
+            <label>Enter your Email</label>
+            <input name="email" ng-model="user.email" type="email" required>
+            <div ng-messages="forgotForm.email.$error" ng-if='forgotForm.email.$touched'>
+                <div ng-message="required">Email is required.</div>
+                <div ng-message="email">Your email address is invalid</div>
+            </div>
+        </md-input-container>
+        <div layout="column" layout-align="end center">
+            <md-button class="md-primary md-raised">Send Reset Email</md-button>
+        </div>
+    </form>
+</div>

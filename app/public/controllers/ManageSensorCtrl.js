@@ -4,7 +4,7 @@
 angular.module('sensorCloudApp')
     .controller('ManageSensorCtrl', ManageSensorCtrl);
 
-function ManageSensorCtrl($scope,$mdDialog){
+function ManageSensorCtrl($scope,$mdDialog,$mdToast,$http){
 
     $scope.sensors = [
         { sensorName: 'Home', sensorType: '(555) 251-1234', sensorSerialNo: '5354-3454' },
@@ -14,7 +14,7 @@ function ManageSensorCtrl($scope,$mdDialog){
     $scope.showDialog = function(ev) {
         $mdDialog.show({
             controller: DialogCtrl,
-            templateUrl: 'partials/add_sensor_dialog.html',
+            templateUrl: 'views/add_sensor_dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true
@@ -27,19 +27,26 @@ function ManageSensorCtrl($scope,$mdDialog){
 
     };
 
-}
-function DialogCtrl($scope, $mdDialog) {
-    console.log("Hellooooooooooooooo");
-    $scope.hide = function() {
+    function DialogCtrl($scope, $mdDialog) {
 
-        $mdDialog.hide();
-    };
-    $scope.cancel = function() {
+        $scope.sensor = {
+            sensorName : '',
+            sensorType : '',
+            serialNo : ''
+        };
 
-        $mdDialog.cancel();
-    };
-    $scope.answer = function(answer) {
+        $scope.addSensor = function(){
 
-        $mdDialog.hide(answer);
-    };
+            $http.post('/sensor/register', $scope.sensor).success(function (data) {
+                if(data.state == 'success') {
+                    $mdToast.show($mdToast.simple().content(data.message));
+                }else {
+                    $scope.error_message = data.message;
+                    $mdToast.show($mdToast.simple().content($scope.error_message));
+                    console.log($scope.error_message);
+                }
+            });
+            $mdDialog.hide();
+        }
+    }
 }

@@ -67,31 +67,12 @@ angular.module('userModule',[])
         $scope.user = User.getUser();
         $scope.rePassword = User.getRePassword();
 
-        $scope.login = function() {
-            console.log("I am running");
-            console.log($scope.user);
-            $http.post('/auth/login', $scope.user).success(function (data) {
-                if(data.state == 'success') {
-                    User.setUser(data.user);
-                   console.log(data.user);
-                    $state.go('sensor-user');
-                    User.setAuthenticated(true);
-                    console.log(User.isAuthenticated());
-                }
-                else {
-                    $scope.error_message = data.message;
-                    $mdToast.show($mdToast.simple().content($scope.error_message));
-                    console.log($scope.error_message);
-                    User.setAuthenticated(false);
-                }
-            });
-        };
-
         $scope.register = function() {
             $http.post('/auth/register', $scope.user).success(function (data) {
                 if(data.state == 'success') {
+                    $state.go('^.login');
+                    $mdToast.show($mdToast.simple().content(data.message));
                     console.log(data.message);
-                    $location.path('/login');
                 }else{
                     $scope.error_message = data.message;
                     $mdToast.show($mdToast.simple().content($scope.error_message));
@@ -99,6 +80,43 @@ angular.module('userModule',[])
                 }
             })
         };
+        $scope.login = function() {
+            $http.post('/auth/login', $scope.user).success(function (data) {
+                if(data.state == 'success') {
+                    User.setUser(data.user);
+                    console.log(data.user);
+                    User.setAuthenticated(true);
+                    if(data.user.userType == 'user'){
+                        $state.go('sensor-user');
+                    }else{
+                        $state.go('sensor-owner');
+                    }
+                }else {
+                    $scope.error_message = data.message;
+                    $mdToast.show($mdToast.simple().content($scope.error_message));
+                    console.log($scope.error_message);
+                    $scope.user = User.getUser();
+                    $state.go('login');
+                    User.setAuthenticated(false);
+                }
+            });
+        };
+
+        $scope.forgotPassword = function(){
+
+            $http.post('/api/forgot',{'email': $scope.user.email}).success(function (data) {
+                if(data.state == 'success') {
+                    $state.go('^');
+                    $mdToast.show($mdToast.simple().content(data.message));
+                }else {
+                    $scope.error_message = data.message;
+                    $mdToast.show($mdToast.simple().content($scope.error_message));
+                    console.log($scope.error_message);
+                }
+            });
+        }
+
+
 
 
     });

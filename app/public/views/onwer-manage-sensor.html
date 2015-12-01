@@ -1,0 +1,29 @@
+ <div id="demo">
+     <md-data-table-toolbar>
+         <h2 class="md-title">Sensors</h2>
+     </md-data-table-toolbar>
+
+     <md-data-table-container>
+         <table md-data-table md-row-select="selected" md-progress="deferred">
+             <thead md-order="query.order" md-trigger="onOrderChange">
+             <tr>
+                 <th>Sensor Name</th>
+                 <th>Sensor Type</th>
+                 <th>Serial Number</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr md-auto-select ng-repeat="sensor in sensors">
+                 <td>{{ sensor.sensorName }}</td>
+                 <td>{{ sensor.sensorType }}</td>
+                 <td>{{ sensor.sensorSerialNo }}</td>
+
+             </tr>
+             </tbody>
+         </table>
+     </md-data-table-container>
+
+     <md-button class="md-fab md-fab-bottom-right md-primary" aria-label="Add" ng-click="showDialog()">
+         <md-icon md-svg-src="img/icons/android.svg"></md-icon>
+    </md-button>
+</div>

@@ -9,7 +9,8 @@ var app = angular.module('sensorCloudApp', ['userModule','ui.router', 'ngResourc
 	};
 });
 
-app.config(function ($stateProvider, $urlRouterProvider){
+app.config(function ($stateProvider, $urlRouterProvider,$locationProvider){
+
 	$stateProvider
 
 		.state('index',{
@@ -18,9 +19,9 @@ app.config(function ($stateProvider, $urlRouterProvider){
 				'' : { templateUrl: 'main.html',
 					   controller: 'UserCtrl'},
 				'toolbar': {
-					templateUrl : '/partials/toolbar.html',
-					controller: 'ToolbarCtrl as toolbar'
-				}
+					templateUrl : '/views/toolbar.html',
+					controller: 'ToolbarCtrl',
+					controllerAs:'toolbar'				}
 			}
 		})
 		.state('sensor-owner',{
@@ -30,21 +31,22 @@ app.config(function ($stateProvider, $urlRouterProvider){
 						templateUrl: 'sensor_owner_db.html'
 						},
 					'toolbar': {
-						templateUrl : '/partials/toolbar.html',
-						controller: 'ToolbarCtrl as toolbar'
+						templateUrl : '/views/toolbar.html',
+						controller: 'ToolbarCtrl',
+						controllerAs:'toolbar'
 						}
 			}
 		})
 
 		.state('sensor-owner.profile',{
 			url:'/profile',
-			templateUrl: '/partials/profile.html',
+			templateUrl: '/views/profile.html',
 			controller: 'ProfileCtrl',
 			controllerAs: 'profile'
 		})
 		.state('sensor-owner.manage-sensor',{
 			url:'/manage-sensors',
-			templateUrl: '/partials/onwer-manage-sensor.html',
+			templateUrl: '/views/onwer-manage-sensor.html',
 			controller: 'ManageSensorCtrl'
 		})
 		.state('sensor-user',{
@@ -54,29 +56,62 @@ app.config(function ($stateProvider, $urlRouterProvider){
 					templateUrl: 'sensor_user_db.html'
 				},
 				'toolbar': {
-					templateUrl : '/partials/toolbar.html',
-					controller: 'ToolbarCtrl as toolbar'
+					templateUrl : '/views/toolbar.html',
+					controller: 'ToolbarCtrl',
+					controllerAs:'toolbar'
 				}
 			}
 		})
 		.state('sensor-user.profile',{
 			url:'/profile',
-			templateUrl: '/partials/profile.html',
+			templateUrl: '/views/profile.html',
 			controller: 'ProfileCtrl',
 			controllerAs: 'profile'
 		})
 		.state('sensor-user.availableSensor',{
 				url:'/availableSensor',
-				templateUrl: '/partials/AvailableSensor.html',
+				templateUrl: '/views/AvailableSensor.html',
 				controller : 'AvailableSensorCtrl'
 		})
 		.state('sensor-user.mySensor',{
 			url:'/mySensor',
-			templateUrl: '/partials/MySensor.html',
+			templateUrl: '/views/MySensor.html',
 			controller : 'MySensorCtrl'
-		});
+		})
+		.state('login',{
+			url:'/login',
+			data:'login',
+			views: {
+				'': {
+					templateUrl: '/views/login.html',
+					controller: 'UserCtrl'
+				},
+				'toolbar': {
+					templateUrl : '/views/toolbar.html',
+					controller: 'ToolbarCtrl',
+					controllerAs:'toolbar'
 
+				}
+			}
+		})
+		.state('forgot',{
+			url:'/forgot',
+			data: 'forgot',
+			views: {
+				'' : {
+					templateUrl: '/views/forgot.html',
+					controller: 'UserCtrl'
+				},
+				'toolbar': {
+					templateUrl : 'views/toolbar.html',
+					controller:'ToolbarCtrl',
+					controllerAs:'toolbar'
+
+				}
+			}
+		});
 	$urlRouterProvider.when('', '/index');
+
 });
 
 app.config(function($mdThemingProvider){
@@ -94,7 +129,7 @@ app.config(function($mdThemingProvider){
 		.backgroundPalette('grey');
 
 	$mdThemingProvider.theme('custom')
-		.primaryPalette('blue')
+		.primaryPalette('grey')
 		.accentPalette('orange')
 		.warnPalette('red');
 
