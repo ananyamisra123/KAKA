@@ -71,7 +71,7 @@ router.route('/getSensors')
         });
     });
 
-router.routes('/availableSensors')
+router.route('/availableSensors')
 
     .get(function(req,res){
         Sensor.find({'activated': true}, function(err, sensors){
