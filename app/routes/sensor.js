@@ -47,11 +47,29 @@ router.route('/activate')
             if(!sensor){
                 return res.send({'status': 'failure', message: 'No Sensor Registered with this serial name'});
             }
+            sensor.activated = true;
+            sensor.save(function(err){
+               if(err) console.log("Unable to save" +err);
+                res.send({'status': 'success', 'sensorId' : sensor._id , 'serialNo' : sensor.serialNo});
+            });
 
-            res.send({'status': 'success', 'sensorId' : sensor._id , 'serialNo' : sensor.serialNo});
         }) ;
     });
+router.route('/getSensors')
+    .get(function(req,res){
+        Sensor.find({ 'userId' : req.user.id}, function (err, sensors){
 
+            if(err) console.log(err);
+
+            if(!sensors){
+                return res.send({'status': 'failure', message: 'No Sensors Available'});
+            }
+            console.log('sensors data returned' + [sensors]);
+            res.json(sensors);
+               // return res.send({'status' : 'success', 'data' : [sensors]});
+
+        });
+    });
 router.route('/data')
 
     .post(function(req,res){

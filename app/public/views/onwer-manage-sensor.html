@@ -10,13 +10,15 @@
                  <th>Sensor Name</th>
                  <th>Sensor Type</th>
                  <th>Serial Number</th>
+                 <th>Activated</th>
              </tr>
              </thead>
              <tbody>
              <tr md-auto-select ng-repeat="sensor in sensors">
                  <td>{{ sensor.sensorName }}</td>
                  <td>{{ sensor.sensorType }}</td>
-                 <td>{{ sensor.sensorSerialNo }}</td>
+                 <td>{{ sensor.serialNo }}</td>
+                 <td>{{ sensor.activated }}</td>
 
              </tr>
              </tbody>

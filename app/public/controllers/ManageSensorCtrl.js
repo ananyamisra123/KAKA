@@ -5,12 +5,23 @@ angular.module('sensorCloudApp')
     .controller('ManageSensorCtrl', ManageSensorCtrl);
 
 function ManageSensorCtrl($scope,$mdDialog,$mdToast,$http){
+    $http.get('/sensor/getSensors').success(function (data) {
+        console.log(data);
+        $scope.sensors = data;
+        /*if(data.state == 'success') {
+           // $scope.sensors =
 
-    $scope.sensors = [
+        }else {
+            $scope.error_message = data.message;
+            $mdToast.show($mdToast.simple().content($scope.error_message));
+            console.log($scope.error_message);
+        }
+*/    });
+    /*$scope.sensors = [
         { sensorName: 'Home', sensorType: '(555) 251-1234', sensorSerialNo: '5354-3454' },
         { sensorName: 'Cell', sensorType: '(555) 786-9841', sensorSerialNo: '5354-3454' },
         { sensorName: 'Office', sensorType: '(555) 314-1592', sensorSerialNo: '5354-3454' }
-    ];
+    ];*/
     $scope.showDialog = function(ev) {
         $mdDialog.show({
             controller: DialogCtrl,
