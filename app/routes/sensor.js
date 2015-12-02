@@ -55,6 +55,7 @@ router.route('/activate')
 
         }) ;
     });
+
 router.route('/getSensors')
     .get(function(req,res){
         Sensor.find({ 'userId' : req.user.id}, function (err, sensors){
@@ -83,6 +84,18 @@ router.route('/availableSensors')
             res.json(sensors);
         });
 
+    });
+
+router.route('/enabledSensors')
+    .get(function(req,res){
+        Sensor.find({'enabled': true, 'userId': req.user.id}, function(err,sensors){
+            if(err)console.log(err);
+
+            if(!sensors){
+                return res.send({'status': failure, message: 'No Enabled Sensors' });
+            }
+            res.json(sensors);
+        });
     });
 
 router.route('/data')

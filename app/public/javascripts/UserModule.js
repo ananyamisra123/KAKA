@@ -12,12 +12,17 @@ angular.module('userModule',[])
     .factory('User', function(){
 
         var user = {
-            firstName : '',
-            lastName : '',
-            email : '',
-            password : '',
-            phoneNumber : '',
-            gender : ''
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: '',
+            address: '',
+            address2: '',
+            city: '',
+            state: '',
+            userType: '',
+            phoneNumber: ''
+
         };
 
         var rePassword = '';
@@ -114,8 +119,27 @@ angular.module('userModule',[])
                     console.log($scope.error_message);
                 }
             });
-        }
+        };
+        $scope.logout = function(){
+            var user = {
+                email: '',
+                firstName: '',
+                lastName: '',
+                password: '',
+                address: '',
+                address2: '',
+                city: '',
+                state: '',
+                userType: '',
+                phoneNumber: ''
 
+            };
+            $http.get('/auth/signout');
+            User.setAuthenticated(false);
+            User.setUser(user);
+            $state.go('index');
+
+        };
 
 
 

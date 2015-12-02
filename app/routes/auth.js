@@ -104,31 +104,31 @@ module.exports = function(passport){
     });
 
     //Update the user values
-    router.put('/update',function(req,res){
+    router.route('/update')
 
-        User.find({ 'email' :  req.body.email }, function(err, user){
-            if(!user){
-                return res.send({state: 'failure', user: null, message: "No User with that email" + req.body.email});
-            }else{
-                user.email = req.body.email;
-                user.password = req.body.password;
-                user.firstName = req.body.firstName;
-                user.lastName = req.body.lastName;
-                user.address = req.body.address;
-                user.address2 = req.body.address2;
-                user.userType = req.body.userType;
-                user.city = req.body.city;
-                user.state = req.body.state;
-                user.phoneNumber = req.body.phoneNumber;
+        .put(function(req,res){
+            User.findById(req.user.id, function(err, user){
+                if(!user){
+                    return res.send({state: 'failure', user: null, message: "No User with that email" + req.body.email});
+                }else{
+                    user.password= req.body.password;
+                    user.firstName = req.body.firstName;
+                    user.lastName = req.body.lastName;
+                    user.address = req.body.address;
+                    user.address2 = req.body.address2;
+                    user.city = req.body.city;
+                    user.state = req.body.state;
+                    user.phoneNumber = req.body.phoneNumber;
 
-                user.save(function (err) {
-                    if (err) console.log(err);
-                    return res.send({state: 'success', message: "Successfully Updated"});
-                });
-            }
-
+                    // save the user
+                    user.save(function(err) {
+                        if (err)
+                            console.log(err);
+                        return res.send({state: 'success', message: "Successfully Updated"})
+                    });
+                }
+            });
         });
-    });
     return router;
 
 };

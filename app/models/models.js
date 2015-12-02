@@ -31,7 +31,8 @@ var sensorSchema = new mongoose.Schema({
     sensorName : String,
     serialNo : String,
     sensorType: String,
-    activated: {type: Boolean, default:false}
+    activated: {type: Boolean, default:false},
+    enabled: {type: Boolean, default:false}
 });
 
 var sensorDataSchema = new mongoose.Schema({

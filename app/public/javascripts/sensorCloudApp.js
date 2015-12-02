@@ -113,7 +113,13 @@ app.config(function ($stateProvider, $urlRouterProvider,$locationProvider){
 	$urlRouterProvider.when('', '/index');
 
 });
-
+app.config(['$mdIconProvider', function($mdIconProvider) {
+	$mdIconProvider
+		 // Register a specific icon (by name)
+		.icon('add', 'images/svg/ic_add_white_36px.svg')
+		.icon('profile','images/svg/ic_face_black_36px.svg')
+		.icon('manage','images/svg/ic_settings_black_36px.svg');
+}]);
 app.config(function($mdThemingProvider){
 
 	$mdThemingProvider.theme('default')
@@ -134,11 +140,7 @@ app.config(function($mdThemingProvider){
 		.warnPalette('red');
 
 });
-app.config(['$mdIconProvider', function($mdIconProvider) {
-	$mdIconProvider
-		.iconSet('social', 'images/icons/sets/social/svg', 24)
-		.defaultIconSet('img/icons/sets/core-icons.svg', 24);
-}]);
+
 
 app.factory('postService', function($resource){
 	return $resource('/api/posts/:id');

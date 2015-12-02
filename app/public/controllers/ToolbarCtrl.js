@@ -4,7 +4,7 @@
 angular.module('sensorCloudApp')
     .controller('ToolbarCtrl', ToolbarCtrl);
 
-function ToolbarCtrl($scope, User, $state){
+function ToolbarCtrl($scope, User, $state, $http){
         this.isAuthenticated =  false;
         this.isLoginOrForgot = false;
 
@@ -25,7 +25,4 @@ function ToolbarCtrl($scope, User, $state){
     $scope.forgot = function(){
         $state.go('forgot');
     };
-
-
 }
-

@@ -1,12 +1,18 @@
 <div layout="row" flex layout-fill>
 
     <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-        <md-button class="md-primary" ui-sref=".profile">
-            PROFILE
-        </md-button>
-        <md-button class="md-primary" ui-sref=".manage-sensor">
-            MANAGE SENSORS
-        </md-button>
+        <div layout="row" layout-align="center center">
+            <md-icon md-svg-icon="profile"></md-icon>
+            <md-button class="md-primary" ui-sref=".profile" flex>
+                PROFILE
+            </md-button>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-icon md-svg-icon="manage"></md-icon>
+            <md-button class="md-primary" ui-sref=".manage-sensor" flex>
+                MANAGE SENSORS
+            </md-button>
+        </div>
     </md-sidenav>
 
     <div flex ui-view  class="relative" layout="column" layout-padding role="main"></div>

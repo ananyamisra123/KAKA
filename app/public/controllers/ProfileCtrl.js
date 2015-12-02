@@ -4,17 +4,20 @@
 angular.module('sensorCloudApp')
     .controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl($scope, User){
+function ProfileCtrl($scope,$http, User){
+    this.user = User.getUser();
 
     $scope.viewMode = false;
-
     $scope.edit = function(){
         console.log('iam edit');
         $scope.viewMode = true;
     };
 
     $scope.save = function(){
-        console.log('iam save');
+        console.log("I am save");
+        $http.put("/auth/update",this.user).success(function(data){
+            console.log(data);
+        });
         $scope.viewMode = false;
     };
 
@@ -24,9 +27,6 @@ function ProfileCtrl($scope, User){
     };
 
 
-    console.log(User.getUser());
-    this.user = User.getUser();
 
-    console.log(User.isAuthenticated());
 
 }
